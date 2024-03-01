@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Gym Decision</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+    .container {
+        text-align: center;
+    }
+    .option {
+        display: inline-block;
+        padding: 20px;
+        border: 2px solid #333;
+        margin: 10px;
+        cursor: pointer;
+    }
+    #no:hover {
+        animation: moveAround 1s infinite;
+    }
+    @keyframes moveAround {
+        0% {
+            transform: translate(0, 0);
+        }
+        25% {
+            transform: translate(20px, 20px);
+        }
+        50% {
+            transform: translate(40px, 0);
+        }
+        75% {
+            transform: translate(20px, -20px);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+    #video-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: 9999;
+        display: none;
+    }
+    #video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Adjusted object-fit property */
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Do you want to go to the gym?</h1>
+    <div id="Yes💪" class="option" onclick="playFullScreenVideo()">Yes💪</div>
+    <div id="No🏳️‍🌈" class="option" onmouseover="avoidCursor()">No🏳️‍🌈</div>
+</div>
+
+<div id="video-container">
+    <video id="gymVideo" loop>
+        <source src="https://images-ext-2.discordapp.net/external/AbtmHv4Heq7h3nNdxDjtSs11C3EqL0yPgyWJcjPuNx4/https/media.tenor.com/f7E8sZdzjGEAAAPo/%25E3%2583%2580%25E3%2583%25B3%25E3%2583%2599%25E3%2583%25AB-%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <audio id="gymAudio" loop>
+        <source src="C:\Users\gebruiker\Downloads\Untitled video - Made with Clipchamp (12).mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+</div>
+
+<script>
+    document.getElementById("No🏳️‍🌈").addEventListener("mouseover", avoidCursor);
+
+    function playFullScreenVideo() {
+        var videoContainer = document.getElementById("video-container");
+        videoContainer.style.display = "block";
+        var video = document.getElementById("gymVideo");
+        var audio = document.getElementById("gymAudio");
+        video.play();
+        audio.play();
+    }
+
+    function avoidCursor() {
+        var noOption = document.getElementById("No🏳️‍🌈");
+        noOption.style.position = "absolute";
+        var maxX = window.innerWidth - noOption.offsetWidth;
+        var maxY = window.innerHeight - noOption.offsetHeight;
+        var newX = Math.floor(Math.random() * maxX);
+        var newY = Math.floor(Math.random() * maxY);
+        noOption.style.left = newX + "px";
+        noOption.style.top = newY + "px";
+    }
+</script>
+</body>
+</html>
